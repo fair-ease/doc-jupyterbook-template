@@ -1,4 +1,6 @@
-# FAIRE-EASE Jupyterbook template
+# FAIRE-EASE Jupyterbook on Marine Omics pilot
+
+Go directly to the deployed [book]().
 
 ## Install the project
 
@@ -17,9 +19,9 @@ Run a local server:
 ```bash
 cd book/
 
+# preferrably use mystd, since it is used for deployment.
+mystd start --execute
+
+# using jupyter
 jupyter book start --execute
 ```
-
-## Structure
-
-to be completed
