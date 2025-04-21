@@ -1,14 +1,14 @@
 # See book at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  id: book-template
+  id: book-mgo
   title: My FAIR-EASE Book
-  description: Blabla to be completed
-  github: https://github.com/fair-ease/doc-jupyterbook-template
+  description: Description of data and analysis products for EMO-BON marine metagenomics sampling.
+  github: https://github.com/fair-ease/doc-jupyterbook-mgo
   jupyter:
     lite: true
     binder: true
-  keywords: ["FAIR-EASE", "book"]
+  keywords: ["FAIR-EASE", "book", "metagenomics"]
   open_access: true
   license:
     content:
@@ -16,14 +16,13 @@ project:
     code:
       id: LGPL-3.0-only
   authors:
-    - id: ebodere
-      name: Erwan Bodéré
-      orcid: 0000-0002-0507-4274
+    - id: dpalecek
+      name: David Palecek
+      # orcid: 0000-0002-0507-4274
       affiliations:
-        - id: ifremer
-          institution: Ifremer
-          ror: 044jxhp58
-          department: Research Infrastructure and Information Systems
+        - id: ccmar
+          institution: CCMAR-Algarve
+          department: Plant Systematics and Bioinformatics
   exclude:
 
 

@@ -1,7 +1,8 @@
-numpy
-pandas
-plotly
-matplotlib
 ipyleaflet
 ipywidgets
 ipykernel
+matplotlib
+numpy
+pandas
+plotly
+seaborn
