@@ -15,6 +15,8 @@ pip install -r .binder/requirements.txt
 Run a local server:
 
 ```bash
+cd book/
+
 jupyter book start --execute
 ```
 
