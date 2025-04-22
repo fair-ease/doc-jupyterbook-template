@@ -22,7 +22,7 @@ Here I create graphs from the secondary analysis (GECCO) runs to identify *Biosy
 
 ::::{note} Pilot demos allow to submit and receive GECCO jobs run on Galaxy. If interested, start [here](https://github.com/emo-bon/momics-demos?tab=readme-ov-file#wf3-biosynthetic-gene-clusters-bgcs)
 :class: dropdown
-:::
+::::
 
 ## Setup
 
