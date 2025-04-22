@@ -1,6 +1,6 @@
 # FAIRE-EASE Jupyterbook on Marine Omics pilot
 
-Go directly to the deployed [book]().
+Go directly to the deployed [book](https://lab.fairease.eu/doc-jupyterbook-mgo/).
 
 ## Install the project
 

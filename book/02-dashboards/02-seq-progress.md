@@ -132,7 +132,7 @@ Explore sequencing progress per sampling station:
 ```{code-cell}
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+from IPython.display import display, clear_output
 
 toggle = widgets.ToggleButtons(
     options=['totals', 'percentages'],
@@ -141,25 +141,36 @@ toggle = widgets.ToggleButtons(
     button_style='success',
 )
 
-def plot_stations(df, mode):
-  if mode == "totals":
-    sns.barplot(df, x=df.index, y="total")
-    plt.ylabel("# samples sequenced")
-
-  elif mode == "percentages":
-    sns.barplot(df, x=df.index, y="percentage")
-    plt.ylabel("% samples sequenced")
-
-  plt.xlabel('station's ID')
-  
-
 plot_selector = widgets.Output()
-display(toggle, plot_selector)
+
+def plot_stations(df, mode):
+    with plot_selector:
+        clear_output(wait=True)  # Clear previous output before drawing the new plot
+        fig, ax = plt.subplots(figsize=(10, 6))
+        if mode == "totals":
+            sns.barplot(data=df, x=df.index, y="total", ax=ax)
+            ax.set_ylabel("# samples sequenced")
+            ax.set_title(f"Sequencing Tracker ({mode})")
+        elif mode == "percentages":
+            sns.barplot(data=df, x=df.index, y="percentage", ax=ax)
+            ax.set_ylabel("% samples sequenced")
+            ax.set_title(f"Sequencing Tracker ({mode})")
+        ax.set_xlabel("station's ID")
+        
+        plt.xticks(rotation=45, ha='right')
+        plt.tight_layout()
+        plt.show()  # Ensure the figure is shown in notebook output
+
+plot_stations(df_stats, "totals")
 
 def on_value_change(change):
     with plot_selector:
-        print(change['new'])
+        plot_stations(df_stats, change['new'])
 
+# Observe changes in the toggle button
 toggle.observe(on_value_change, names='value')
 
+# Display the widgets and the plot
+display(toggle)
+display(plot_selector)
 ```

@@ -1,5 +1,5 @@
 ---
-title: Virtual Research Environment 🧙
+title: Virtual Research Environment
 authors:
   - F-E
 ---

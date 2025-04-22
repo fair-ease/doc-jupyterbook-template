@@ -2,6 +2,8 @@ ipyleaflet
 ipywidgets
 ipykernel
 matplotlib
+momics @ git+https://github.com/emo-bon/marine-omics-methods.git@v0.1.0
+networkx
 numpy
 pandas
 plotly
