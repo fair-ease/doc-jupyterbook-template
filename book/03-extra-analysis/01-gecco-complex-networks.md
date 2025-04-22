@@ -174,7 +174,11 @@ color_hash = {
 tables = bgc_tables_dict(data_list)
 ```
 
-Below are methods I use to construct the network using `networkx` package.
+## Graph methods
+
+Below are methods I use to construct the network using `networkx` package. They include adding two types of nodes, color `BGCs` and grey `domain` nodes, create the graph edges (`edges`). `generate_graph()` puts all this into a single graph which has its own identifier constructed from *replicate, observation ID, collection date, environmental material and filter used*.
+
+Then we have functions to plot the graph (`plot_graph()`) and domain count histogram (`plot_domain_edges_counts()`), respectively.
 
 ```{code-cell}
 :class: dropdown
@@ -190,7 +194,7 @@ def graph_nodes_edges(df, color_hash):
                 }
             ),
         )
-    print(f"Number of nodes: {len(nodes)}")
+    print(f"Number of BGC nodes: {len(nodes)}")
 
     nodes_domains = []
     already_seen = set()
@@ -234,9 +238,6 @@ def generate_graph(nodes, nodes_domains, edges, collection_date):
     G.add_nodes_from(nodes)
     G.add_nodes_from(nodes_domains)
     G.add_edges_from(edges)
-
-    print(f"Number of nodes: {G.number_of_nodes()}")
-    print(f"Number of edges: {G.number_of_edges()}")
     return G
 
 
@@ -251,8 +252,8 @@ def plot_graph(G, color_hash):
     nc = nx.draw_networkx_nodes(G, pos, nodelist=G.nodes, node_color=colors,
                                 node_size=15,
                                 alpha=0.5,
-                                cmap=plt.cm.jet)
-    # plt.colorbar(color_hash)
+                                # cmap=plt.cm.jet,
+                                )
     plt.axis('off')
     plt.legend(
         handles=[plt.Line2D([0], [0], marker='o', color='w', label=k, markerfacecolor=v)
@@ -262,7 +263,6 @@ def plot_graph(G, color_hash):
         title="BGC type",
     )
     plt.title(f"Sample info: {G.graph['date']}")
-    plt.show()
 
 from collections import Counter
 def count_multiple_edges(edges):
@@ -289,7 +289,6 @@ def count_multiple_edges(edges):
 
 def plot_domain_edges_counts(counts, title: str = "Domain counts"):
     # barplot
-    plt.figure(figsize=(10, 5))
     plt.bar(counts.keys(), counts.values())
     plt.xticks(rotation=90)
     plt.xlabel('Domain')
@@ -297,7 +296,6 @@ def plot_domain_edges_counts(counts, title: str = "Domain counts"):
     plt.title('Domain Counts')
     plt.tight_layout()
     plt.title(title, )
-    plt.show()
 
 
 def create_graph_id(df_metadata: pd.DataFrame, name: str):
@@ -305,15 +303,190 @@ def create_graph_id(df_metadata: pd.DataFrame, name: str):
     return graph_id
 ```
 
+## Example BGC graph
+
 Example of a resulting graph can look like this one
 
 ```{code-cell}
 # over all
+name = data_list[0]
+
+df = tables[name]
 nodes, nodes_domains, edges = graph_nodes_edges(df, color_hash)
 
 # contitutes date nad replicate number to make it unique
-graph_id = create_graph_id(df_metadata, table_names[0])
+graph_id = create_graph_id(df_metadata, name)
 G = generate_graph(nodes, nodes_domains, edges, graph_id)
 plot_graph(G, color_hash)
 ```
 
+Of course one cannot see anything useful, the same way as looking at the `.csv` tables underlaying this graph. However many descriptor metrics exist for such graphs, which describe *connectivite*, *relatedness* etc.
+
+## Graph analysis
+
+### Domain counter
+
+Not related yet to the graph, we can plot the distribution of domains identified over all the BGCs
+
+```{code-cell}
+# count domain appearence
+cnt_full, cnt_multiple = count_multiple_edges(edges)
+
+# plot the histogram
+plot_domain_edges_counts(cnt_multiple, f"Sample info: {G.graph['date']}")
+```
+
+### Graph metrics
+
+Check out exhaustive list of `networkx` [algorithms](https://networkx.org/documentation/stable/reference/algorithms/index.html) in the docs. Few random examples here
+
+**percentage of nodes which are bridges**
+A bridge in a graph is an edge whose removal causes the number of connected components of the graph to increase. Equivalently, a bridge is an edge that does not belong to any cycle. Bridges are also known as cut-edges, isthmuses, or cut arcs.
+
+```{code-cell}
+print(f"{round(len(list(nx.bridges(G, root=None)))/G.number_of_nodes() * 100, 2)} %")
+```
+
+**Maximum independent set**
+An independent set is a set of vertices in a graph where no two vertices in the set are adjacent. The maximum independent set is the independent set of largest possible size for a given graph.
+
+```{code-cell}
+from networkx.algorithms.approximation import maximum_independent_set
+
+ind_set = maximum_independent_set(G)
+print(f"Size of Maximum independent set: {len(ind_set)}")
+```
+
+**Average degree connectivity**
+The average degree connectivity is the average nearest neighbor degree of nodes with degree k.
+
+```{code-cell}
+nx.average_degree_connectivity(G)
+```
+
+**Average node connectivity**
+The average connectivity bar{kappa} of a graph G is the average of local node connectivity over all pairs of nodes of G.
+
+```{code-cell}
+nx.average_node_connectivity(G)
+```
+
+### Time evolution
+
+The above metrics are related to individual sequencing results, therefore they can be compared based on metadata (in the permanova style) or simple plotted over time or any other conditions.
+
+Let's try to display `nx.average_node_connectivity(G)` over time for our series of samples
+
+First, construct all the graphs, plot graph and the histogram, calculte the connectivity and add those values to the DF (out of laziness).
+
+```{code-cell}
+
+## all graphs
+df_metadata['connectivity'] = 0.0
+df_metadata['bgc_nodes'] = 0
+df_metadata['total_edges'] = 0
+df_metadata['domain_nodes'] = 0
+for name in data_list:
+    df = tables[name]
+    collection_date = create_graph_id(df_metadata, name)
+
+    nodes, nodes_domains, edges = graph_nodes_edges(tables[name], color_hash)
+    G = generate_graph(nodes, nodes_domains, edges, collection_date)
+    cnt_full, cnt_multiple = count_multiple_edges(edges)
+
+    plt.subplots(2, 1, figsize=(10, 8))
+    plt.subplot(2, 1, 1)
+    plot_domain_edges_counts(cnt_multiple, f"Saomple info: {G.graph['date']}")
+    plt.subplot(2, 1, 2)
+    plot_graph(G, color_hash)
+    plt.tight_layout()
+    plt.show()
+
+    # calculate the average degree connectivity of graph.
+    avg_conn = nx.average_node_connectivity(G)
+    print(f"Average node connectivity for {name}: {avg_conn}")
+    df_metadata.loc[df_metadata['reads_name_short'] == name, 'connectivity'] = avg_conn
+    df_metadata.loc[df_metadata['reads_name_short'] == name, 'bgc_nodes'] = len(nodes)
+    df_metadata.loc[df_metadata['reads_name_short'] == name, 'total_edges'] = len(edges)
+    df_metadata.loc[df_metadata['reads_name_short'] == name, 'domain_nodes'] = len(nodes_domains)
+```
+
+Now take different subsets of the 16 Ria Formosa samples and plot the evolution of the connectivity over 3 sampling dates
+
+```{code-cell}
+df_to_plot = df_metadata[df_metadata['connectivity'] > 0.0]
+
+# filter tables
+water = df_to_plot[df_to_plot['env_package'] == 'water_column']
+sediment = df_to_plot[df_to_plot['env_package'] == 'soft_sediment']
+
+water_eukaryotes = water[water['size_frac'] == '3-200']
+water_prokaryotes = water[water['size_frac'] == '0.2-3']
+water_nan = water[water['size_frac'].isnull()]
+
+sediment_eukaryotes = sediment[sediment['size_frac'] == '3-200']
+sediment_prokaryotes = sediment[sediment['size_frac'] == '0.2-3']
+sediment_nan = sediment[sediment['size_frac'].isnull()]
+
+plt.figure(figsize=(10, 5))
+plt.plot(water_eukaryotes['collection_date'], water_eukaryotes['connectivity'], 'o', ms=8, linewidth=0.3, label='water Eukaryotes')
+plt.plot(water_prokaryotes['collection_date'], water_prokaryotes['connectivity'], 'o', ms=8,linewidth=0.3, label='water Prokaryotes')
+plt.plot(sediment_eukaryotes['collection_date'], sediment_eukaryotes['connectivity'], 'o', ms=8,linewidth=0.3, label='sediment Eukaryotes')
+plt.plot(sediment_prokaryotes['collection_date'], sediment_prokaryotes['connectivity'], 'o', ms=8,linewidth=0.3, label='sediment Prokaryotes')
+plt.plot(sediment_nan['collection_date'], sediment_nan['connectivity'], 'o', ms=8,linewidth=0.3, label='sediment Nan filter')
+plt.xlabel('Collection date')
+plt.ylabel('Average node connectivity')
+plt.title('Average node connectivity over time')
+plt.xticks(rotation=30)
+plt.show()
+```
+
+Additionally, we plot total amount of `BGCs`, `domains` and `edges` for each type of sample over time.
+
+```{code-cell}
+plt.figure(figsize=(10, 5))
+plt.plot(water_eukaryotes['collection_date'], water_eukaryotes['bgc_nodes'], 'o', ms=8, label='water Eukaryotes')
+plt.plot(water_prokaryotes['collection_date'], water_prokaryotes['bgc_nodes'], 'o', ms=8, label='water Prokaryotes')
+plt.plot(sediment_eukaryotes['collection_date'], sediment_eukaryotes['bgc_nodes'], 'o', ms=8, label='sediment Eukaryotes')
+plt.plot(sediment_prokaryotes['collection_date'], sediment_prokaryotes['bgc_nodes'], 'o', ms=8, label='sediment Prokaryotes')
+plt.plot(sediment_nan['collection_date'], sediment_nan['bgc_nodes'], 'o', ms=8, label='sediment Nan filter')
+plt.xlabel('Collection date')
+plt.ylabel('Number of BGCs')
+plt.title('Number of BGCs over time')
+plt.xticks(rotation=30)
+plt.tight_layout()
+plt.legend()
+plt.show()
+
+plt.figure(figsize=(10, 5))
+plt.plot(water_eukaryotes['collection_date'], water_eukaryotes['total_edges'], 'o', ms=8, label='water Eukaryotes')
+plt.plot(water_prokaryotes['collection_date'], water_prokaryotes['total_edges'], 'o', ms=8, label='water Prokaryotes')
+plt.plot(sediment_eukaryotes['collection_date'], sediment_eukaryotes['total_edges'], 'o', ms=8, label='sediment Eukaryotes')
+plt.plot(sediment_prokaryotes['collection_date'], sediment_prokaryotes['total_edges'], 'o', ms=8, label='sediment Prokaryotes')
+plt.plot(sediment_nan['collection_date'], sediment_nan['total_edges'], 'o', ms=8, label='sediment Nan filter')
+plt.xlabel('Collection date')
+plt.ylabel('Number of edges')
+plt.title('Number of edges over time')
+plt.xticks(rotation=30)
+plt.tight_layout()
+plt.legend()
+plt.show()
+
+plt.figure(figsize=(10, 5))
+plt.plot(water_eukaryotes['collection_date'], water_eukaryotes['domain_nodes'], 'o', ms=8, label='water Eukaryotes')
+plt.plot(water_prokaryotes['collection_date'], water_prokaryotes['domain_nodes'], 'o', ms=8, label='water Prokaryotes')
+plt.plot(sediment_eukaryotes['collection_date'], sediment_eukaryotes['domain_nodes'], 'o', ms=8, label='sediment Eukaryotes')
+plt.plot(sediment_prokaryotes['collection_date'], sediment_prokaryotes['domain_nodes'], 'o', ms=8, label='sediment Prokaryotes')
+plt.plot(sediment_nan['collection_date'], sediment_nan['domain_nodes'], 'o', ms=8, label='sediment Nan filter')
+plt.xlabel('Collection date')
+plt.ylabel('Number of domain nodes')
+plt.title('Number of domain nodes over time')
+plt.xticks(rotation=30)
+plt.tight_layout()
+plt.legend()
+plt.show()
+```
+
+## Summary
+
+None of this answers any of the possible question you want to ask, but with the growing literature applying complex network methods to metagenomics data in combination of unique unified sampling and sequencing approach by EMO_BON, this dataset is ideal to push the boundaries of monitoring using such tool set.
