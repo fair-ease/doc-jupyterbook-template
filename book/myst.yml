@@ -1,10 +1,10 @@
 # See book at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  id: book-mgo
+  id: uc513-marine-omics-observation
   title: My FAIR-EASE Book
   description: Description of data and analysis products for EMO-BON marine metagenomics sampling.
-  github: https://github.com/fair-ease/doc-jupyterbook-mgo
+  github: https://github.com/fair-ease/book-marine-omics-observation
   jupyter:
     lite: true
     binder: true
