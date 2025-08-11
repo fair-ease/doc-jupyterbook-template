@@ -13,7 +13,9 @@ The previous figure 1 illustrates the ash plume dispersion during the main explo
 
 Notably, plume activity was detected as early as December 19, 2021 (see figure 2), marking the onset of significant emissions prior to the paroxysmal event of January 15. These early phases are particularly relevant to interpreting anomalies observed in satellite ocean colour products and biogeochemical measurements in the following sections.
 
-![Video of the ash plume from Volcplume](volcplume_2.mp4)
+<video width="640" height="360" autoplay loop muted>
+  <source src="volcplume_2.mp4" type="video/mp4">
+</video>
 *Figure 2: Image of the ash plume (Black colors) distribution resulting from the first Hunga Tonga eruption starting by the end of December 19th, 2021*
 
 ---

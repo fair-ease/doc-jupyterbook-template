@@ -1,5 +1,5 @@
 ---
-title: 🌋🌊 Cookbook: Reproducing the Analysis of the Hunga Tonga Phytoplankton Bloom (2021–2022)
+title: 🌋🌊 Reproducing the Analysis of the Hunga Tonga Phytoplankton Bloom (2021–2022)
 authors: 
     - Reiner Schlitzer
     - Marie Boichu
@@ -16,7 +16,6 @@ authors:
     - Vincent Breton
     - Marie Jossé
     - Jérome Detoc 
-
 ---
 
 
