@@ -43,7 +43,7 @@ Some studies suggest that a phytoplankton bloom followed the eruption (Barone et
 The Hunga Tonga record-breaking explosive eruption on January 15th 2022 was one of the largest eruption since the eruption of Mt. Pinatubo in 1991.  
 One article claims the observation of a phytoplankton bloom in the days following the eruption (Barone et al. 2022 - https://doi.org/10.1029/2022GL099293) 
 
-But this analysis was rebuked in another paper based on Argo biogeochemical data (Franz et al.). This second paper gathers Particulate backscattering coefficients (BBP*) from BGC Argo float observations, but on a larger geographical area compared to the Barone et al. study. 
+But this analysis was rebuked in another paper based on Argo biogeochemical data (Franz et al.). This second paper gathers Particulate backscattering coefficients (BBP[^1]) from BGC Argo float observations, but on a larger geographical area compared to the Barone et al. study. 
 
 A third paper (Zhang et al, 2024) provides an analysis if  in situ data collected by a vessel expedition several weeks after the eruption. Authors of Zhang et al. (2024) show a significant increase in metal concentrations in the water. -  and observe an excess of dissolved iron and chlorophyll close to the eruption site. 
 
@@ -63,5 +63,5 @@ Regarding Hunga Tonga, we identified the interest to study the impact on the oce
 We identified a valuable opportunity to compare two case studies: Hunga Tonga and Etna. While Etna’s eruptions release smaller quantities of ash, the Mediterranean Sea hosts a significantly higher density of Argo floats, offering richer in situ data coverage.  
 In addition, we explored the relevance of water samples—particularly those providing Helium, Iron, and Manganese concentration profiles with depth—as indicators of submarine volcanic or hydrothermal activity, both in the Tonga-Kermadec region and in other potentially significant areas around the globe.
 
-* The Particulate Backscattering Coefficient (BBP) is a measure of the fraction of light that is scattered backward by suspended particles in the water column, typically at a wavelength of around 700 nm.
+[^1]: The Particulate Backscattering Coefficient (BBP) is a measure of the fraction of light that is scattered backward by suspended particles in the water column, typically at a wavelength of around 700 nm.
 ---

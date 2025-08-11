@@ -2,15 +2,15 @@
 
 A combination of visualization web platforms, data access services, and custom scripts was employed to process and analyze the selected datasets:
 
-### webODV*
-[https://webodv.awi.de/](https://webodv.awi.de/) – both on the FAIR-EASE testbed** infrastructure and local desktop version – was used to explore and visualize:
+### webODV[^2]
+[https://webodv.awi.de/](https://webodv.awi.de/) – both on the FAIR-EASE testbed[^3] infrastructure and local desktop version – was used to explore and visualize:
 - GEOTRACES data
 - Helium isotope data
 - Copernicus Marine Service – GlobColour products (Chlorophyll-a, BBP)
 - Sea surface height and geostrophic current datasets
 - BGC-Argo float profiles
 
-### VolcPlume***
+### VolcPlume[^4]
 [https://volcplume.aeris-data.fr/](https://volcplume.aeris-data.fr/) provided a key web platform to monitor the start and end dates of volcanic gas/particle emissions, as well as the spatial dispersion of volcanic plumes (including their content in SO₂, ash, sulfate aerosols, and ice crystals) related to both Hunga Tonga and Etna eruptions.
 
 ### EuroArgo Tools
@@ -37,7 +37,7 @@ In order to work on the interoperability between the data, a set of services hav
 ![FAIR-EASE infrastructure testbed](testbed.png)
 *Figure 0: FAIR-EASE infrastructure testbed*
 
-* webODV is an online data exploration and visualization platform developed as a web-based extension of the widely used Ocean Data View (ODV) software. It enables users to interactively explore, subset, and visualize large oceanographic and environmental datasets without requiring local software installation.
-** The testbed is a datalake infrastructure at UCA mesocentre
-*** VolcPlume is a web-based visualization and analysis platform developed by Univ. Lille/LOA and AERIS/ICARE to monitor and study volcanic gas/particle emissions using satellite and ground data. It integrates a wide range of remote sensing products to track the emission and dispersion of volcanic plumes in the atmosphere (in near-real time or retrospectively).
+[^2]: webODV is an online data exploration and visualization platform developed as a web-based extension of the widely used Ocean Data View (ODV) software. It enables users to interactively explore, subset, and visualize large oceanographic and environmental datasets without requiring local software installation.
+[^3]: The testbed is a datalake infrastructure at UCA mesocentre
+[^4]: VolcPlume is a web-based visualization and analysis platform developed by Univ. Lille/LOA and AERIS/ICARE to monitor and study volcanic gas/particle emissions using satellite and ground data. It integrates a wide range of remote sensing products to track the emission and dispersion of volcanic plumes in the atmosphere (in near-real time or retrospectively).
 ---
