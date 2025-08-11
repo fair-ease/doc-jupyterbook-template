@@ -1,53 +1,65 @@
-
-**Authors**:  
-Reiner Schlitzer, Marie Boichu, Catherine Schmechtig, Virginie Racapé, Laura Leroi, Marilu Chiusano, Clément Weber, Delphine Dobler, Catalina Reyes, Christine Coatanoan, Julie Gatti, Alban Sizun, Vincent Breton, Marie Josse, Jérome Detoc  
-
+--
+title: 🌋🌊 Cookbook: Reproducing the Analysis of the Hunga Tonga Phytoplankton Bloom (2021–2022)
+authors: 
+    - Reiner Schlitzer
+    - Marie Boichu
+    - Catherine Schmechtig
+    - Virginie Racapé
+    - Laura Leroi
+    - Marilu Chiusano
+    - Clément Weber
+    - Delphine Dobler
+    - Catalina Reyes
+    - Christine Coatanoan
+    - Julie Gatti
+    - Alban Sizun
+    - Vincent Breton
+    - Marie Jossé
+    - Jérome Detoc 
 ---
 
-# Where did we start?
-
-The **Hunga Tonga** record-breaking explosive eruption on **January 15th 2022** was one of the largest of the 21st century.
-
-- One article claims the observation of a phytoplankton bloom in the days following the eruption:  
-  Barone et al. 2022 – [doi:10.1029/2022GL099293](https://doi.org/10.1029/2022GL099293)  
-
-- This analysis was **rebutted** in another paper based on Argo biogeochemical data:  
-  Franz et al. (larger scale BGC-Argo data compared to Barone et al.).
-
-- A third paper, based on on-site expedition data collected **several weeks after the eruption**, observed a significant increase in metal concentrations in the water:  
-  Zhang et al. 2024 – excess dissolved iron and chlorophyll close to the eruption.
 
 ---
+# 1. Study Goals and Scientific Questions
 
-## Questions we aimed to answer
+## Background
+On January 15, 2022 took place an explosive eruption of Hunga Tonga Hunga Ha’apai volcano (later called Hunga Tonga HT) which represents one of the most explosive eruption since the eruption of Mt. Pinatubo in 1991.
 
-1. Do **satellite data** (bbp, chlorophyll-a, fluorescence) confirm or refute the phytoplankton bloom?  
-2. If confirmed, is the bloom due to:  
-   1. Deposition of ash onto the ocean surface  
-   2. Nutrients from submarine volcanic activity  
-   3. Both  
-3. If refuted, could the anomalies in ocean colour products be due to retrieval algorithm bias caused by:  
-   1. Ash particles suspended in the atmosphere  
-   2. Ash particles settled onto the surface of the ocean  
-   3. Both  
-4. Are **BGC-Argo data** relevant to confirm or refute the bloom?  
-5. Are there **discrete water sample data** from cruises to complement understanding of submarine volcanic activity impact?  
-6. Are there **biological data** related to the Hunga Tonga eruption to provide further bloom insight?
+Some studies suggest that a phytoplankton bloom followed the eruption (Barone et al., 2022), others disagree (Franz et al.), and additional biogeochemical findings (Zhang et al., 2024) add new perspectives on the impact of the HT eruption on the ocean chemistry.
 
----
+![Volcanic explosion video](plume.mp4)
 
-## Additional identified interests
+## Main Scientific Questions
+- Do satellite ocean color products (CHLA, BBP, nFLH) confirm or reject the presence of a bloom?
+- If confirmed, is it due to the deposition of ash on the surface of the ocean, or to nutrients provided by the submarine volcanic activity , or both?
+- If rejected, are ocean colour anomalies a result of satellite algorithm biases (by the presence of deposited ash onto the ocean surface or ash suspended in the atmosphere)?
+- Can BGC-Argo or discrete sampling data validate satellite observations?
+- Are there supporting biological or geochemical indicators?
 
-- Study the impact on ocean biology and geochemistry from:
-  1. The main explosive phase (**15 Jan 2022**)
-  2. Pre-paroxysmal activity (**Dec 2021 – Jan 2022**)
-  3. Previous eruption (**Dec 2014 – Jan 2015**)  
+## 1.1. Where did we start ?
 
-  → These earlier events are poorly documented in literature.
+The Hunga Tonga record-breaking explosive eruption on January 15th 2022 was one of the largest eruption since the eruption of Mt. Pinatubo in 1991.  
+One article claims the observation of a phytoplankton bloom in the days following the eruption (Barone et al. 2022 - https://doi.org/10.1029/2022GL099293) 
 
-- Compare **Hunga Tonga** and **Etna**:
-  - Etna: less ash release, but higher Argo float density in Mediterranean.
+But this analysis was rebuked in another paper based on Argo biogeochemical data (Franz et al.). This second paper gathers Particulate backscattering coefficients (BBP*) from BGC Argo float observations, but on a larger geographical area compared to the Barone et al. study. 
 
-- Investigate water samples (Helium, Fe, Mn concentrations) for submarine volcanic/hydrothermal activity detection.
+A third paper (Zhang et al, 2024) provides an analysis if  in situ data collected by a vessel expedition several weeks after the eruption. Authors of Zhang et al. (2024) show a significant increase in metal concentrations in the water. -  and observe an excess of dissolved iron and chlorophyll close to the eruption site. 
 
+### Questions we aimed to answer
+
+- Are the satellite ocean color data (BBP, chlorophyll-a and fluorescence parameters)  confirming/infirming the phytoplankton bloom ?  
+- If the phytoplankton bloom is confirmed: does it result from (1) the deposition of ash onto the surface of the ocean, (2) the nutrients provided by submarine volcanic activity, or (3) from both?  
+- If the phytoplankton bloom is infirmed, it means that observed anomalies in satellite ocean colour products near the eruption site artificially result from a bias in the retrieval algorithm of satellite data. Is this bias associated with the inaccurate correction for (1) the presence of ash particles that are suspended in the atmosphere, or (2) from the ash particles that settled down onto the surface of the ocean? or (3) from both?  
+- Are the BGC-Argo data relevant to confirm or infirm the  bloom ?  
+- Do we have discrete data water samples from cruise campaigns that can bring complementary information on the potential widespread impact of volcanic submarine activity on ocean geochemistry?  
+- Are they biological data related to the Hunga Tonga eruption that could provide further information on the bloom?  
+
+Regarding Hunga Tonga, we identified the interest to study the impact on the ocean biological activity and geochemistry from (1) the major record-breaking explosive phase taking place on 15 January 2022, (2) the pre-paroxysmal eruptive activity from December 2021 to 15 January 2022, with submarine volcanic activity punctuated by emissions of SO2/ash in the atmosphere, (3) the previous eruption of Hunga Tonga in December 2014-January 2015. According to our knowledge, the eruptive activities of Hunga Tonga in December 2021-early January 2022, and in 2014-2015 were poorly studied in the published literature (to our knowledge).
+
+### Additional points of interest
+
+We identified a valuable opportunity to compare two case studies: Hunga Tonga and Etna. While Etna’s eruptions release smaller quantities of ash, the Mediterranean Sea hosts a significantly higher density of Argo floats, offering richer in situ data coverage.  
+In addition, we explored the relevance of water samples—particularly those providing Helium, Iron, and Manganese concentration profiles with depth—as indicators of submarine volcanic or hydrothermal activity, both in the Tonga-Kermadec region and in other potentially significant areas around the globe.
+
+* The Particulate Backscattering Coefficient (BBP) is a measure of the fraction of light that is scattered backward by suspended particles in the water column, typically at a wavelength of around 700 nm.
 ---
