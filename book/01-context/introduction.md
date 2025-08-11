@@ -16,6 +16,7 @@ authors:
     - Vincent Breton
     - Marie Jossé
     - Jérome Detoc 
+
 ---
 
 
@@ -27,7 +28,9 @@ On January 15, 2022 took place an explosive eruption of Hunga Tonga Hunga Ha’a
 
 Some studies suggest that a phytoplankton bloom followed the eruption (Barone et al., 2022), others disagree (Franz et al.), and additional biogeochemical findings (Zhang et al., 2024) add new perspectives on the impact of the HT eruption on the ocean chemistry.
 
-![Volcanic explosion video](plume.mp4)
+<video width="640" height="360" autoplay loop muted>
+  <source src="plume.mp4" type="video/mp4">
+</video>
 
 ## Main Scientific Questions
 - Do satellite ocean color products (CHLA, BBP, nFLH) confirm or reject the presence of a bloom?
